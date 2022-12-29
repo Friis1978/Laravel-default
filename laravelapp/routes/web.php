@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    $name = "Code with Dary";
+//Route::get('/blog',[PostsController::class, 'index']);
 
-    return view('welcome', [
-        'name' => $name
-    ]);
-});
+Route::resource('blog', PostsController::class);
+
+// Route for invoke method
+Route::get('/', HomeController::class);
