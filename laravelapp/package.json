@@ -2,7 +2,11 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "vite build"
+        "build": "vite build",
+        "db:new-migration":"php artisan make:migration create_posts_table",
+        "db:migrate-database": "php artisan migrate",
+        "db:migrate-db-with-seed": "php artisan migrate --seed",
+        "db:reset": "php artisan migrate:reset"
     },
     "devDependencies": {
         "axios": "^1.1.2",
