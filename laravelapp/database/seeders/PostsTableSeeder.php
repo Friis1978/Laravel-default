@@ -10,6 +10,7 @@ class PostsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * Tutorial: https://youtu.be/UN42ad3KXqQ
      *
      * @return void
      */
