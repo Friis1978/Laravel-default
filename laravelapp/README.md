@@ -22,18 +22,20 @@ Commands:
 - Add the debugbar to the providers: /config/app.php providers [Barryvdh\Debugbar\ServiceProviders::class]
 
 - Console log print out: 
-Debugbar::info('Info in debugbar');
-Debugbar::error('Error in debugbar');
+```Debugbar::info('Info in debugbar');```
+```Debugbar::error('Error in debugbar');```
 
 - Use Timeline, to track rendering time:
-Debugbar::startMeasure('Name', 'Message');
+```Debugbar::startMeasure('Name', 'Message');```
 
 - Track exceptions:
+```
 try {
     throw new Exception('Try Message!');
 } catch (Exception $e) {
     Debugbar::addException($e);
 }
+```
 
 ### Controller
 [Controllers for beginners](https://youtu.be/Aoqj5nuwBQI)
@@ -42,10 +44,11 @@ try {
 2. new controller has been added in: app/Http/Controllers/PostsController.php
 
 3. Add a function to index in PostsController.php: 
-public function index()
+```public function index()
 {
  return 'This is the index method';
 }
+```
 
 4. Add routes in /routes/web.php
 ```Route::get('/blog', [PostsController::class,'index']);```
