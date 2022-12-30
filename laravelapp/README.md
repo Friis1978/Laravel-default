@@ -90,14 +90,42 @@ Route::prefix('/blog')->group(function () {
 });
 ```
 ### DB:
+[Laravel Database](https://youtu.be/4dId4tpEYII)
 
-- Migrate database: php artisan migrate
-- Reset database: php artisan migrate:reset
-- Seed database: php artisan migrate --seed
+1. Database setup: /config/database.php
+2. Check connection: 
+```
+php artisan tinker
+DB::connection()->getPdo();
+exit;
+```
+### DB migrations:
+[Laravel Database migrations](https://youtu.be/wX-MsYST3kI)
+
+1. Migrations: /database/migrations
+2. Create new migration prefilled: ```php artisan make:migration create_posts_table --create=posts```
+3. Add a new table:
+```
+    Schema::create('posts', function (Blueprint $table) {
+        $table->id();
+        $table->string('title')->unique();
+        $table->text('excerpt')->nullable();
+        $table->text('body');
+        $table->integer('min_to_read')->default(1);
+        $table->string('image_path');
+        $table->boolean('is_published');
+        $table->timestamps();
+    });
+```
+3. Migrate the new table: ```php artisan migrate```
+4. Check status of database tables: ```php artisan migrate:status```
+5. Roll back all: ```php artisan migrate:reset```
+6. Roll back all & migrate: ```php artisan migrate:refresh```
 
 
 ## All artisan commands
 
+```
 Usage:
   command [options] [arguments]
 
@@ -239,6 +267,8 @@ Available commands:
  view
   view:cache             Compile all of the application's Blade templates
   view:clear             Clear all compiled view files
+
+```
 
 ## About Laravel
 
