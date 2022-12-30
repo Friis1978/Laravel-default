@@ -167,6 +167,29 @@ public function run()
 7. Run migration with the seeds: ```php artisan migrate --seed```
 8. Run only seeds data: ```php artisan db:seed```
 
+### DB factory data:
+[Laravel Database factories](https://youtu.be/Opy6yBDTkhM)
+
+1. Make a new factory to posts: ```php artisan make:factory PostFactory```
+2. Factory path: /database/factories/PostFactory.php
+3. Define keyvalue pairs:
+```
+public function definition()
+    {
+        return [
+            'title' => $this->faker->unique()->sentence(),
+            'excerpt' => $this->faker->realText($maxNbChars = 50),
+            'body' => $this->faker->text(),
+            'image_path' => $this->faker->imageUrl(640, 480),
+            'is_published' => 1,
+            'min_to_read' => $this->faker->numberBetween(1, 10)
+        ];
+    }
+
+```
+3. Add the factory method in DatabaseSeeder.php: ```Post::factory(100)->create();```
+4. Run the seed command: ```php artisan db:seed```
+
 ## All artisan commands
 
 ```
