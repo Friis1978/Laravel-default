@@ -53,7 +53,42 @@ try {
 4. Add routes in /routes/web.php
 ```Route::get('/blog', [PostsController::class,'index']);```
 
-5. Auto create all resources: php artisan make:controller PostsController --resource
+5. Auto create all resources: ```php artisan make:controller PostsController --resource```
+6. Check all refined routes: ```php artisan route:list```
+
+
+### Routing parameters
+[Routes with expressions](https://youtu.be/PiTnHWbvbPM)
+```
+Route::get('/blog',[PostsController::class, 'index'])->name('blog.index');
+Route::get('/blog/{id}',[PostsController::class, 'show'])->name('blog.show');
+
+// With RegExpressions
+Route::get('/blog/{id}',[PostsController::class, 'show'])->where('id', '[0-9]+');
+Route::get('/blog/{name}',[PostsController::class, 'show'])->where('name', '[A-Za-z]+');
+Route::get('/blog/{id}/{name}',[PostsController::class, 'show'])->where([
+    'id'=>'[0-9]+',
+    'name'=>'[A-Za-z]+',
+]);
+
+//With Helper methods
+Route::get('/blog/{id}/{name}',[PostsController::class, 'show'])
+    ->whereNumber('id')
+    ->whereAlpha('name');
+```
+### Route prefixes
+[Route with prefixed](https://youtu.be/JZQEl2gKctQ)
+```
+Route::prefix('/blog')->group(function () {
+    Route::get('/',[PostsController::class, 'index'])->name('blog.index');
+    Route::get('/{id}',[PostsController::class, 'show'])->name('blog.show');
+    Route::get('/create',[PostsController::class, 'create'])->name('blog.create');
+    Route::post('/',[PostsController::class, 'store'])->name('blog.store');
+    Route::get('/edit/{id}',[PostsController::class, 'edit'])->name('blog.edit');
+    Route::patch('/{id}',[PostsController::class, 'update'])->name('blog.update');
+    Route::delete('/{id}',[PostsController::class, 'destroy'])->name('blog.destroy');
+});
+```
 ### DB:
 
 - Migrate database: php artisan migrate

@@ -21,21 +21,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/blog',[PostsController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}',[PostsController::class, 'show'])->name('blog.show');
 
-// Routes with expressions: https://youtu.be/PiTnHWbvbPM
-
-// With RegExpressions
-//Route::get('/blog/{id}',[PostsController::class, 'show'])->where('id', '[0-9]+');
-//Route::get('/blog/{name}',[PostsController::class, 'show'])->where('name', '[A-Za-z]+');
-// Route::get('/blog/{id}/{name}',[PostsController::class, 'show'])->where([
-//     'id'=>'[0-9]+',
-//     'name'=>'[A-Za-z]+',
-// ]);
-
-// With Helper methods
-// Route::get('/blog/{id}/{name}',[PostsController::class, 'show'])
-//     ->whereNumber('id')
-//     ->whereAlpha('name');
-
 // POST
 Route::get('/blog/create',[PostsController::class, 'create'])->name('blog.create');
 Route::post('/blog',[PostsController::class, 'store'])->name('blog.store');
