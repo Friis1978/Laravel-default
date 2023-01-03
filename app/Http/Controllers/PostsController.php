@@ -63,14 +63,24 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         // Using object oriented php to submit form
-        $post = new Post();
-        $post->title = $request->title;
-        $post->excerpt = $request->excerpt;
-        $post->body = $request->body;
-        $post->image_path = 'temporary';
-        $post->is_published = $request->is_published === 'on';
-        $post->min_to_read = $request->min_to_read;
-        $post->save();
+        // $post = new Post();
+        // $post->title = $request->title;
+        // $post->excerpt = $request->excerpt;
+        // $post->body = $request->body;
+        // $post->image_path = 'temporary';
+        // $post->is_published = $request->is_published === 'on';
+        // $post->min_to_read = $request->min_to_read;
+        // $post->save();
+
+        // Using Eloquent
+        Post::create([
+            'title' => $request->title,
+            'excerpt' => $request->excerpt,
+            'body' => $request->body,
+            'image_path' => 'temporary',
+            'is_published' => $request->is_published === 'on',
+            'min_to_read' => $request->min_to_read,
+        ]);
 
         return redirect(route('blog.index'));
     }
