@@ -14,4 +14,10 @@ class Post extends Model
     // protected $timestamps = false;
     // protected $dateTime = 'U';
 
+    // protected $connection = 'sqlite';
+
+    // protected $attributes = [
+    //     'is_published' => true
+    // ];
+
 }

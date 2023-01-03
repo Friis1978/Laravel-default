@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -23,8 +24,22 @@ class PostsController extends Controller
         // return view('blog.index', compact('posts'));
 
         // Key value pair
+        // return view('blog.index', [
+        //     'posts' => DB::table('posts')->get()
+        // ]);
+
+        // Using Eloquent
+        // $posts = Post::orderBy('id', 'desc')->take(10)->get();
+        // dd($posts);
+
+        // Post::chunk(25, function ($posts) {
+        //     foreach($posts as $post) {
+        //         echo $post->title . '<br>';
+        //     }
+        // });
+
         return view('blog.index', [
-            'posts' => DB::table('posts')->get()
+            'posts' => Post::orderBy('updated_at', 'desc')->get()
         ]);
 
     }
@@ -36,7 +51,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('blog.create');
     }
 
     /**
@@ -47,7 +62,17 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Using object oriented php to submit form
+        $post = new Post();
+        $post->title = $request->title;
+        $post->excerpt = $request->excerpt;
+        $post->body = $request->body;
+        $post->image_path = 'temporary';
+        $post->is_published = $request->is_published === 'on';
+        $post->min_to_read = $request->min_to_read;
+        $post->save();
+
+        return redirect(route('blog.index'));
     }
 
     /**
@@ -58,7 +83,11 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        return $id;
+        $post = Post::findOrFail($id);
+
+        return view('blog.show', [
+            'post'=> $post
+        ]);
     }
 
     /**
