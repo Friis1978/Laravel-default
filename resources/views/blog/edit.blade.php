@@ -32,7 +32,7 @@
     </div>
 @endif
 
-<div class="w-4/5 m-auto pt-20">
+<div class="w-4/5 m-auto pt-5">
     <form
         action="{{ route('blog.update', $post->id) }}"
         method="POST"
@@ -40,37 +40,33 @@
         @csrf
         @method('PATCH')
 
-        <label for="is_published" class="text-gray-500 text-2xl">
-            Is Published
-        </label>
-        <input
-            type="checkbox"
-            {{ $post->is_published === true ? 'checked' : '' }}
-            class="bg-transparent block border-b-2 inline text-2xl outline-none"
-            name="is_published">
+        <div class="flex items-center pl-4 mb-5">
+            <input type="checkbox" name="is_published" class="w-6 h-6 text-green-500 bg-gray-100 border-gray-300 rounded focus:ring-green-300 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="is_published" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Is Published</label>
+        </div>
 
         <input
             type="text"
             name="title"
             value="{{ $post->title }}"
-            class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+            class="bg-transparent block w-full h-20 text-2xl outline-none focus:ring-green-300 dark:focus:ring-green-600 mb-5 border-green-700 rounded-lg">
 
         <input
             type="text"
             name="excerpt"
             value="{{ $post->excerpt }}"
-            class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+            class="bg-transparent block w-full h-20 text-2xl outline-none focus:ring-green-300 dark:focus:ring-green-600 mb-5 border-green-700 rounded-lg">
 
         <input
             type="number"
             name="min_to_read"
             value="{{ $post->min_to_read }}"
-            class="bg-transparent block border-b-2 w-full h-20 text-2xl outline-none">
+            class="bg-transparent block w-full h-20 text-2xl outline-none focus:ring-green-300 dark:focus:ring-green-600 mb-5 border-green-700 rounded-lg">
 
         <textarea
             name="body"
             placeholder="Body..."
-            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none">
+            class="py-20 bg-transparent block border-b-2 w-full h-60 text-xl outline-none focus:ring-green-300 dark:focus:ring-green-600 mb-5 border-green-700 rounded-lg">
             {{ $post->body }}
         </textarea>
             
