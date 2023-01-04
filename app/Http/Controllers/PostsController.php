@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
+    // Control if routes are restricted for auth users only
+    public function __construct()
+    {
+        $this->middleware('auth')->only(['create', 'edit', 'update', 'destroy']);
+    }
+
     /**
      * Make a set of new controllers with artisan: https://youtu.be/Aoqj5nuwBQI
      * command: php artisan make:controller PostsController --resource
