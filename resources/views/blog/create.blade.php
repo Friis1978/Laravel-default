@@ -5,15 +5,33 @@
         @vite('resources/css/app.css')
       </head>
 <body>
-<div class="w-4/5 mx-auto">
-    <div class="text-center pt-20">
-        <h1 class="text-3xl text-gray-700">
-            Add new post
-        </h1>
-        <hr class="border border-1 border-gray-300 mt-10">
+    <div class="w-4/5 m-auto text-left">
+        <div class="py-15">
+            <h1 class="text-6xl">
+                Create Post
+            </h1>
+        </div>
     </div>
 
-<div class="m-auto pt-20">
+@if ($errors->any())
+    <div class="mx-auto w-4/5 py-2">
+        <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+            Warning
+        </div>
+        <div class="border border-t-1 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+            {{ session()->get('message') }}
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>
+                        {{ $error }}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    </div>
+@endif
+
+<div class="w-4/5 m-auto pt-5">
     <form
         action="{{ route('blog.store') }}"
         method="POST"

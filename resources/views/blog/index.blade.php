@@ -7,9 +7,9 @@
 <body class="w-full h-full bg-gray-100">
     <div class="w-4/5 mx-auto">
         <div class="text-center pt-20">
-            <h1 class="text-3xl text-gray-700">
-                All Articles
-            </h1>
+        <h1 class="text-3xl text-gray-700">
+            All Articles
+        </h1>
             <hr class="border border-1 border-gray-300 mt-10">
         </div>
 

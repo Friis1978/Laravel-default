@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostFormRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -60,7 +61,7 @@ class PostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostFormRequest $request)
     {
         // Using object oriented php to submit form
         // $post = new Post();
@@ -73,14 +74,7 @@ class PostsController extends Controller
         // $post->save();
 
         // Using Eloquent
-
-        $request->validate([
-            'title' => 'required|unique:posts|max:255',
-            'excerpt' => 'required',
-            'body' => 'required',
-            'image' => ['required', 'mimes:jpg,png,jpeg', 'max:5048'],
-            'min_to_read' => 'min:0|max:60'
-        ]);
+        $request->validated();
 
         Post::create([
             'title' => $request->title,
@@ -129,16 +123,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostFormRequest $request, $id)
     {
         // Using Eloquent
-        $request->validate([
-            'title' => 'required|max:255|unique:posts,title,' . $id,
-            'excerpt' => 'required',
-            'body' => 'required',
-            'image' => ['mimes:jpg,png,jpeg', 'max:5048'],
-            'min_to_read' => 'min:0|max:60'
-        ]);
+        $request->validated();
 
         Post::where('id', $id)->update($request->except(['_token', '_method']));
 
